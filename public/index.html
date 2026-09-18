@@ -1,1 +1,62 @@
-<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GPX Reconstructor</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><link rel="stylesheet" href="/style.css"></head><body><main><h1>GPX Reconstructor</h1><p>Genskab den manglende del af en GPX-rute.</p><section><label>1. Upload broken GPX</label><input id="gpx" type="file" accept=".gpx"><h3>2. Vælg rute</h3><div class="tabs"><button id="drawTab" class="active">✏️ Tegn rute</button><button id="googleTab">🗺️ Google Maps-link</button></div><div id="draw"><p>Klik på kortet for at tegne den manglende rute.</p><div id="map"></div><button id="undo">Fortryd</button><button id="clear">Ryd</button></div><div id="google" hidden><label>Google Maps-link</label><input id="url" placeholder="Indsæt 'Kopiér link'"><button id="load">Hent rute</button><p>Google-linkets koordinater bruges som start/destination/waypoints; vejføringen beregnes med OSRM/OpenStreetMap.</p></div><div class="grid"><div><label>Slut latitude</label><input id="lat" type="number" step="any"></div><div><label>Slut longitude</label><input id="lon" type="number" step="any"></div></div><label>Sluttidspunkt</label><input id="time" type="datetime-local"><button id="go" class="primary">🔧 Genskab GPX</button><p id="status"></p><a id="download" hidden>Download GPX</a></section></main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPX Reconstructor</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="wrap">
+<header><h1>GPX Reconstructor</h1><p>Vis din GPX, vælg eller tegn den manglende rute, og få automatisk genereret GPS-punkter og tider.</p></header>
+
+<section class="card">
+  <label for="gpx">1. Upload din GPX</label>
+  <input id="gpx" type="file" accept=".gpx,application/gpx+xml">
+  <div id="fileInfo" class="info">Ingen GPX valgt.</div>
+
+  <div class="sectionTitle">2. Manglende rute</div>
+  <div class="tabs">
+    <button type="button" id="drawTab" class="active">✏️ Tegn rute</button>
+    <button type="button" id="googleTab">🗺️ Brug Google Maps-link</button>
+  </div>
+
+  <div id="map"></div>
+  <div class="mapHelp">Klik på kortet for at tilføje punkter til den manglende del. Ruten starter automatisk ved sidste punkt i din GPX.</div>
+  <div class="row">
+    <button type="button" id="undo">↶ Fortryd</button>
+    <button type="button" id="clear">Ryd tegning</button>
+    <button type="button" id="finish">✓ Færdig med ruten</button>
+  </div>
+
+  <div id="googlePanel" hidden>
+    <label for="googleUrl">Google Maps-rute-link</label>
+    <input id="googleUrl" type="url" placeholder="Indsæt linket fra 'Kopiér link'">
+    <button type="button" id="loadGoogle">Hent Google-rute</button>
+    <p class="hint">Linkets start/destination/waypoints bruges. Vejføringen beregnes med OpenStreetMap/OSRM, så den kan afvige fra Google Maps.</p>
+  </div>
+
+  <div class="sectionTitle">3. Slutpunkt og sluttid</div>
+  <div class="grid">
+    <div><label for="endLat">Latitude</label><input id="endLat" type="number" step="any" placeholder="62.3936803753"></div>
+    <div><label for="endLon">Longitude</label><input id="endLon" type="number" step="any" placeholder="-142.9991007351"></div>
+    <div class="full"><label for="endTime">Sluttidspunkt</label><input id="endTime" type="datetime-local"></div>
+  </div>
+
+  <button type="button" id="reconstruct" class="primary">🔧 Genskab GPX</button>
+  <div id="status" class="status" aria-live="polite"></div>
+  <a id="download" class="download" hidden>⬇ Download reconstructed GPX</a>
+</section>
+
+<section class="card outputCard" id="outputCard" hidden>
+  <div class="sectionTitle">4. Resultat</div>
+  <div id="resultInfo" class="info"></div>
+  <div id="outputMap"></div>
+  <p class="hint">Det originale spor vises sammen med den rekonstruerede del, så du kan kontrollere resultatet visuelt.</p>
+</section>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

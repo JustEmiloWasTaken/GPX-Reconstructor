@@ -1,1 +1,24 @@
-body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}main{max-width:900px;margin:auto;padding:28px 16px}section{background:#fff;padding:20px;border:1px solid #ddd;border-radius:16px}label{display:block;font-weight:650;margin:14px 0 7px}input{width:100%;box-sizing:border-box;padding:11px;font-size:16px;border:1px solid #ccd3df;border-radius:9px}.tabs{display:flex;gap:8px}.tabs button,button{padding:10px 14px;margin:4px;border:1px solid #ccd3df;border-radius:9px;background:#fff}.tabs .active,.primary{background:#172033;color:#fff}.primary{width:100%;margin-top:18px}#map{height:470px;border-radius:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}#status{min-height:24px}@media(max-width:600px){.grid{grid-template-columns:1fr}#map{height:380px}}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7fb;color:#172033;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:28px 16px}
+h1{margin:0 0 6px;font-size:31px}
+header p{margin:0 0 18px;color:#667085}
+.card{background:#fff;border:1px solid #dfe4ec;border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 8px 28px rgba(20,30,50,.06)}
+label{display:block;font-weight:650;margin:13px 0 7px}
+input{width:100%;padding:11px 12px;border:1px solid #cbd3df;border-radius:9px;font-size:16px;background:#fff}
+button{padding:10px 14px;border:1px solid #cbd3df;border-radius:9px;background:#fff;font-size:15px;cursor:pointer}
+button:hover{background:#f3f5f8}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tabs .active{background:#172033;color:#fff;border-color:#172033}
+.sectionTitle{font-size:18px;font-weight:750;margin-top:22px;margin-bottom:8px}
+#map,#outputMap{height:500px;border:1px solid #dfe4ec;border-radius:12px;overflow:hidden}
+.mapHelp,.hint,.info{font-size:14px;color:#667085;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+.primary{width:100%;margin-top:18px;padding:14px;background:#172033;color:#fff;border-color:#172033;font-weight:750;font-size:16px}
+.status{min-height:25px;margin-top:12px}
+.status.error{color:#b42318}
+.status.ok{color:#067647}
+.download{display:inline-block;margin-top:8px;font-weight:750}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}#map,#outputMap{height:390px}}
